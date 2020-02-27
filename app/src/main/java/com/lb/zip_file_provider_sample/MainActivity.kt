@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         val uri = ZipFilesProvider.prepareFilesToShareAsZippedFile(filesToCompress, "someZipFile.zip")
-        val intent = Intent(Intent.ACTION_SEND).setType(ZipFilesProvider.ZIP_FILE_MIME_TYPE).putExtra(Intent.EXTRA_STREAM, uri)//.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        val intent = Intent(Intent.ACTION_SEND).setType(ZipFilesProvider.ZIP_FILE_MIME_TYPE).putExtra(Intent.EXTRA_STREAM, uri)
         startActivity(Intent.createChooser(intent, ""))
     }
 }
