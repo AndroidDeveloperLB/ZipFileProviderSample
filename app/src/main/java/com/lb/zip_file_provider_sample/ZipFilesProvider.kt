@@ -11,7 +11,6 @@ import android.os.Build
 import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.provider.OpenableColumns
-import android.util.Base64
 import java.io.*
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -86,7 +85,7 @@ class ZipFilesProvider : ContentProvider() {
         private fun getFilesPathsToCompress(uri: Uri): HashSet<File> {
             val filesPathsToCompress = HashSet<File>(uri.queryParameterNames.size)
             uri.queryParameterNames.forEach {
-                val path = String(Base64.decode(uri.getQueryParameters(it)[0], Base64.URL_SAFE))
+                val path = uri.getQueryParameters(it)[0]// String(Base64.decode(uri.getQueryParameters(it)[0], Base64.URL_SAFE))
                 filesPathsToCompress.add(File(path))
             }
             return filesPathsToCompress
@@ -95,7 +94,7 @@ class ZipFilesProvider : ContentProvider() {
         fun prepareFilesToShareAsZippedFile(filesToCompress: Collection<String>, zipFileName: String): Uri {
             val builder = Uri.Builder().scheme("content").authority(authority).encodedPath(zipFileName)
             for ((index, filePath) in filesToCompress.withIndex())
-                builder.appendQueryParameter(index.toString(), String(Base64.encode(filePath.toByteArray(), Base64.URL_SAFE)))
+                builder.appendQueryParameter(index.toString(), filePath)//String(Base64.encode(filePath.toByteArray(), Base64.URL_SAFE)))
             return builder.build()
         }
     }

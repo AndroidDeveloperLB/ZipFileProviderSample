@@ -20,6 +20,7 @@
         <provider
             android:name=".ZipFilesProvider"
             android:authorities="${applicationId}.zip_file_provider"
-            android:exported="false"/>
+            android:exported="false"
+            android:grantUriPermissions="true" />
     </application>
 </manifest>
