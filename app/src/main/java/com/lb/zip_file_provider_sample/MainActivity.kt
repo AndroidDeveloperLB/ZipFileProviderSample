@@ -9,6 +9,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        //NOTE: this is a lot of work for the UI thread, but it's just a sample...
         val installedPackages = packageManager.getInstalledPackages(0)
         val filesToCompress = ArrayList<String>()
         val maxFiles = 3
